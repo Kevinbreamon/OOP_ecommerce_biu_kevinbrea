@@ -6,5 +6,10 @@ Adjunto diagrama de clases general:
 
 Como compilador fue utilizado Javac, utilizando la terminal de vs code, es posible apreciar el codigo resultado de la compilacion en la imagen a continuacion:
 
-![image](https://github.com/user-attachments/assets/57f5dd9e-65a9-43ad-81a4-70241c341ccf)
+![image](https://github.com/user-attachments/assets/09c0259b-b1d2-482b-9dd8-ef04cd9bfb7b)
+
+En la mas reciente y ultima actualizacion, se aplicaron los conceptos de polimorfismo y sobrecarga a las clases: Producto, ProductoDigital, ProductoFisico y CarritoDeCompras, logrando mostrar diferentes descripciones si se trata de un producto fisico o digital y permitiendo agregar productos al carrito de compras tanto a traves de su ID como a traves de su nombre. 
+
+
+
 
