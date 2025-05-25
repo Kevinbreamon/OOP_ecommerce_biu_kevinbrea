@@ -14,6 +14,28 @@ public class CarritoDeCompras {
 
     public void agregarProducto(Producto producto, int cantidad) {
         articulos.add(new ArticuloCarrito(producto, cantidad));
+        System.out.println("Producto añadido: " + producto.getNombre() + " (x" + cantidad + ")");
+    }
+
+    // Sobrecarga: agregar por ID
+    public void agregarProducto(int productoId, int cantidad) {
+        Producto producto = buscarProductoPorId(productoId);
+        if (producto != null) {
+            agregarProducto(producto, cantidad);
+        } else {
+            System.out.println("Producto con ID " + productoId + " no encontrado.");
+        }
+    }
+
+    // Sobrecarga: agregar por nombre, precio y cantidad
+    public void agregarProducto(String nombre, float precio, int cantidad) {
+        Producto p = new Producto(nombre, precio, "Sin categoría", -1, -1, "Sin descripción", "") {
+            @Override
+            public void mostrarDetalle() {
+                System.out.println("Producto genérico: " + getNombre() + ", $" + getPrecio());
+            }
+        };
+        agregarProducto(p, cantidad);
     }
 
     public void removerProductoPorId(int productoId) {
@@ -41,9 +63,7 @@ public class CarritoDeCompras {
         articulos.clear();
     }
 
-    // A continuación están establecido los getters y setters de la clase 
-
-        public int getCarritoId() {
+    public int getCarritoId() {
         return carritoId;
     }
 
@@ -51,4 +71,7 @@ public class CarritoDeCompras {
         return articulos;
     }
 
+    private Producto buscarProductoPorId(int productoId) {
+        return null;
+    }
 }

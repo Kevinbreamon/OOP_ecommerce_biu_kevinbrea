@@ -10,8 +10,14 @@ public class ArticuloCarrito {
     }
 
     public float getSubtotal() {
-        return producto.precio * cantidad;
+        return producto.getPrecio() * cantidad;
     }
+
+    public void mostrarInformacionProducto() {
+        producto.mostrarDetalle(); 
+        System.out.println("Cantidad: " + cantidad);
+        System.out.println("Subtotal: $" + getSubtotal());
+    }    
 
     // A continuación están establecido los getters y setters de la clase 
 

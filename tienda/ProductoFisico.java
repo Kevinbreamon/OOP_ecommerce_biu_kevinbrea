@@ -15,6 +15,19 @@ public class ProductoFisico extends Producto {
         this.dimensiones = dimensiones;
     }
 
+    @Override
+    public void mostrarDetalle() {
+        System.out.println("📦 Producto Físico:");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Precio: $" + precio);
+        System.out.println("Categoría: " + categoria);
+        System.out.println("Descripción: " + descripcion);
+        System.out.println("Peso: " + peso + " kg");
+        System.out.println("Dimensiones: " + dimensiones);
+        System.out.println("Stock disponible: " + stock + " unidades");
+        System.out.println("Imagen: " + urlImagen);
+    }
+
      // A continuación están establecido los getters y setters de la clase 
 
         public int getStock() {

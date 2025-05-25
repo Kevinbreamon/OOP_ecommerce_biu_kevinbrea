@@ -11,6 +11,18 @@ public class ProductoDigital extends Producto {
         this.duracion = duracion;
     }
 
+        @Override
+    public void mostrarDetalle() {
+        System.out.println("📱 Producto Digital:");
+        System.out.println("Nombre: " + getNombre());
+        System.out.println("Precio: $" + getPrecio());
+        System.out.println("Categoría: " + getCategoria());
+        System.out.println("Descripción: " + getDescripcion());
+        System.out.println("Licencia: " + licencia);
+        System.out.println("Duración de licencia: " + duracion + " días");
+        System.out.println("Imagen URL: " + getUrlImagen());
+    }
+
     // A continuación están establecido los getters y setters de la clase 
 
         public String getLicencia() {

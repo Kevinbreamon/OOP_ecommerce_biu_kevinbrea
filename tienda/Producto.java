@@ -37,6 +37,25 @@ public abstract class Producto {
         this.precio = precio;
     }
 
+    public void mostrarDetalle() {
+        System.out.println("Producto: " + nombre);
+        System.out.println("Precio: $" + precio);
+        System.out.println("Descripción: " + descripcion);
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "nombre='" + nombre + '\'' +
+                ", precio=" + precio +
+                ", categoria='" + categoria + '\'' +
+                ", productoId=" + productoId +
+                ", id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                ", urlImagen='" + urlImagen + '\'' +
+                '}';
+    }
+
     // A continuación están establecido los getters y setters de la clase 
         public String getNombre() {
         return nombre;
