@@ -5,8 +5,8 @@ public class ArticuloCarrito {
     private int cantidad;
 
     public ArticuloCarrito(Producto producto, int cantidad) {
-        this.producto = producto;
-        this.cantidad = cantidad;
+        setProducto(producto);
+        setCantidad(cantidad);
     }
 
     public float getSubtotal() {
@@ -17,16 +17,20 @@ public class ArticuloCarrito {
         producto.mostrarDetalle(); 
         System.out.println("Cantidad: " + cantidad);
         System.out.println("Subtotal: $" + getSubtotal());
-    }    
+    }
 
-    // A continuación están establecido los getters y setters de la clase 
+    // Getters y setters con validaciones
 
-      public Producto getProducto() {
+    public Producto getProducto() {
         return producto;
     }
 
     public void setProducto(Producto producto) {
-        this.producto = producto;
+        if (producto != null) {
+            this.producto = producto;
+        } else {
+            System.out.println("Error: El producto no puede ser nulo.");
+        }
     }
 
     public int getCantidad() {
@@ -34,6 +38,10 @@ public class ArticuloCarrito {
     }
 
     public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+        if (cantidad > 0) {
+            this.cantidad = cantidad;
+        } else {
+            System.out.println("Error: La cantidad debe ser mayor a cero.");
+        }
     }
 }

@@ -10,9 +10,9 @@ public class ProductoFisico extends Producto {
     public ProductoFisico(String nombre, float precio, String categoria, int productoId, int id, String descripcion,
                           String urlImagen, int stock, float peso, List<String> dimensiones) {
         super(nombre, precio, categoria, productoId, id, descripcion, urlImagen);
-        this.stock = stock;
-        this.peso = peso;
-        this.dimensiones = dimensiones;
+        setStock(stock);
+        setPeso(peso);
+        setDimensiones(dimensiones);
     }
 
     @Override
@@ -28,14 +28,18 @@ public class ProductoFisico extends Producto {
         System.out.println("Imagen: " + urlImagen);
     }
 
-     // A continuación están establecido los getters y setters de la clase 
+    // Getters y setters establecido con sus respectivas validaciones
 
-        public int getStock() {
+    public int getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        if (stock >= 0) {
+            this.stock = stock;
+        } else {
+            System.out.println("Error: El stock no puede ser negativo.");
+        }
     }
 
     public float getPeso() {
@@ -43,7 +47,11 @@ public class ProductoFisico extends Producto {
     }
 
     public void setPeso(float peso) {
-        this.peso = peso;
+        if (peso > 0) {
+            this.peso = peso;
+        } else {
+            System.out.println("Error: El peso debe ser mayor a cero.");
+        }
     }
 
     public List<String> getDimensiones() {
@@ -51,6 +59,10 @@ public class ProductoFisico extends Producto {
     }
 
     public void setDimensiones(List<String> dimensiones) {
-        this.dimensiones = dimensiones;
+        if (dimensiones != null) {
+            this.dimensiones = dimensiones;
+        } else {
+            System.out.println("Error: Las dimensiones no pueden ser nulas.");
+        }
     }
 }

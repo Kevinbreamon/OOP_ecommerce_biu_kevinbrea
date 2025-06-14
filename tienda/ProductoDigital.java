@@ -7,11 +7,11 @@ public class ProductoDigital extends Producto {
     public ProductoDigital(String nombre, float precio, String categoria, int productoId, int id, String descripcion,
                            String urlImagen, String licencia, int duracion) {
         super(nombre, precio, categoria, productoId, id, descripcion, urlImagen);
-        this.licencia = licencia;
-        this.duracion = duracion;
+        setLicencia(licencia);
+        setDuracion(duracion);
     }
 
-        @Override
+    @Override
     public void mostrarDetalle() {
         System.out.println("📱 Producto Digital:");
         System.out.println("Nombre: " + getNombre());
@@ -23,14 +23,18 @@ public class ProductoDigital extends Producto {
         System.out.println("Imagen URL: " + getUrlImagen());
     }
 
-    // A continuación están establecido los getters y setters de la clase 
+    // Getters y setters con sus respectivas validaciones
 
-        public String getLicencia() {
+    public String getLicencia() {
         return licencia;
     }
 
     public void setLicencia(String licencia) {
-        this.licencia = licencia;
+        if (licencia != null && !licencia.trim().isEmpty()) {
+            this.licencia = licencia;
+        } else {
+            System.out.println("Error: La licencia no puede ser vacía.");
+        }
     }
 
     public int getDuracion() {
@@ -38,7 +42,10 @@ public class ProductoDigital extends Producto {
     }
 
     public void setDuracion(int duracion) {
-        this.duracion = duracion;
+        if (duracion > 0) {
+            this.duracion = duracion;
+        } else {
+            System.out.println("Error: La duración debe ser mayor a cero.");
+        }
     }
-
 }

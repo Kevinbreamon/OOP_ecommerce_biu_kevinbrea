@@ -38,22 +38,52 @@ public abstract class Usuario {
     // A continuación están establecido los getters y setters de la clase 
 
     public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setNombre(String nombre) {
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            System.out.println("Error: El nombre no puede ser vacío.");
+        }
+    }
 
     public String getApellido() { return apellido; }
-    public void setApellido(String apellido) { this.apellido = apellido; }
+    public void setApellido(String apellido) {
+        if (apellido != null && !apellido.trim().isEmpty()) {
+            this.apellido = apellido;
+        } else {
+            System.out.println("Error: El apellido no puede ser vacío.");
+        }
+    }
 
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
     public String getCorreo() { return correo; }
-    public void setCorreo(String correo) { this.correo = correo; }
+    public void setCorreo(String correo) {
+        if (correo != null && correo.contains("@")) {
+            this.correo = correo;
+        } else {
+            System.out.println("Error: Correo inválido.");
+        }
+    }
 
     public String getContraseña() { return contraseña; }
-    public void setContraseña(String contraseña) { this.contraseña = contraseña; }
+    public void setContraseña(String contraseña) {
+        if (contraseña != null && contraseña.length() >= 6) {
+            this.contraseña = contraseña;
+        } else {
+            System.out.println("Error: La contraseña debe tener al menos 6 caracteres.");
+        }
+    }
 
     public int getEdad() { return edad; }
-    public void setEdad(int edad) { this.edad = edad; }
+    public void setEdad(int edad) {
+        if (edad >= 18) {
+            this.edad = edad;
+        } else {
+            System.out.println("Error: Se debe ser mayor de edad.");
+        }
+    }
 
     public Date getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(Date fechaCreacion) { this.fechaCreacion = fechaCreacion; }

@@ -10,19 +10,19 @@ public abstract class Producto {
     protected String urlImagen;
 
     public Producto(String nombre, float precio, String categoria, int productoId, int id, String descripcion, String urlImagen) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.categoria = categoria;
+        setNombre(nombre);
+        setPrecio(precio);
+        setCategoria(categoria);
         this.productoId = productoId;
         this.id = id;
-        this.descripcion = descripcion;
+        setDescripcion(descripcion);
         this.urlImagen = urlImagen;
     }
 
     public void editar(String nombre, String descripcion, String categoria) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
+        setNombre(nombre);
+        setDescripcion(descripcion);
+        setCategoria(categoria);
     }
 
     public void eliminar() {
@@ -34,7 +34,7 @@ public abstract class Producto {
     }
 
     public void actualizarStockPrecio(float precio) {
-        this.precio = precio;
+        setPrecio(precio);
     }
 
     public void mostrarDetalle() {
@@ -56,13 +56,18 @@ public abstract class Producto {
                 '}';
     }
 
-    // A continuación están establecido los getters y setters de la clase 
-        public String getNombre() {
+    //  A continuacion los getters y setters con sus validaciones
+
+    public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if (nombre != null && !nombre.trim().isEmpty()) {
+            this.nombre = nombre;
+        } else {
+            System.out.println("Error: El nombre no puede ser vacío.");
+        }
     }
 
     public float getPrecio() {
@@ -70,7 +75,11 @@ public abstract class Producto {
     }
 
     public void setPrecio(float precio) {
-        this.precio = precio;
+        if (precio >= 0) {
+            this.precio = precio;
+        } else {
+            System.out.println("Error: El precio no puede ser negativo.");
+        }
     }
 
     public String getCategoria() {
@@ -78,7 +87,11 @@ public abstract class Producto {
     }
 
     public void setCategoria(String categoria) {
-        this.categoria = categoria;
+        if (categoria != null && !categoria.trim().isEmpty()) {
+            this.categoria = categoria;
+        } else {
+            System.out.println("Error: La categoría no puede ser vacía.");
+        }
     }
 
     public int getProductoId() {
@@ -102,7 +115,7 @@ public abstract class Producto {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    this.descripcion = descripcion;
     }
 
     public String getUrlImagen() {

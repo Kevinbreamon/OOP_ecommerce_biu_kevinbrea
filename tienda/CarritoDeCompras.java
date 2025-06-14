@@ -13,12 +13,20 @@ public class CarritoDeCompras {
     }
 
     public void agregarProducto(Producto producto, int cantidad) {
+        if (cantidad <= 0) {
+            System.out.println("Error: La cantidad debe ser mayor a cero.");
+            return;
+        }
         articulos.add(new ArticuloCarrito(producto, cantidad));
         System.out.println("Producto añadido: " + producto.getNombre() + " (x" + cantidad + ")");
     }
 
     // Sobrecarga: agregar por ID
     public void agregarProducto(int productoId, int cantidad) {
+        if (cantidad <= 0) {
+            System.out.println("Error: La cantidad debe ser mayor a cero.");
+            return;
+        }
         Producto producto = buscarProductoPorId(productoId);
         if (producto != null) {
             agregarProducto(producto, cantidad);
@@ -29,6 +37,14 @@ public class CarritoDeCompras {
 
     // Sobrecarga: agregar por nombre, precio y cantidad
     public void agregarProducto(String nombre, float precio, int cantidad) {
+        if (precio < 0) {
+            System.out.println("Error: El precio no puede ser negativo.");
+            return;
+        }
+        if (cantidad <= 0) {
+            System.out.println("Error: La cantidad debe ser mayor a cero.");
+            return;
+        }
         Producto p = new Producto(nombre, precio, "Sin categoría", -1, -1, "Sin descripción", "") {
             @Override
             public void mostrarDetalle() {
@@ -40,15 +56,21 @@ public class CarritoDeCompras {
 
     public void removerProductoPorId(int productoId) {
         articulos.removeIf(a -> a.getProducto().getProductoId() == productoId);
+        System.out.println("Producto con ID " + productoId + " eliminado del carrito.");
     }
-
     public void modificarCantidad(int productoId, int nuevaCantidad) {
+        if (nuevaCantidad <= 0) {
+            System.out.println("Error: La cantidad debe ser mayor a cero.");
+            return;
+        }
         for (ArticuloCarrito articulo : articulos) {
             if (articulo.getProducto().getProductoId() == productoId) {
                 articulo.setCantidad(nuevaCantidad);
-                break;
+                System.out.println("Cantidad actualizada para producto ID " + productoId);
+                return;
             }
         }
+        System.out.println("Producto con ID " + productoId + " no encontrado en el carrito.");
     }
 
     public float calcularTotal() {

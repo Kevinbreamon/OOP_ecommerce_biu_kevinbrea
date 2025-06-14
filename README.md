@@ -13,3 +13,5 @@ En la mas reciente y ultima actualizacion, se aplicaron los conceptos de polimor
 
 
 
+
+En la ultima actualización fue incluida la validación de datos en las clases del codigo, buscando asegurar poseer informacion correcta para aquellas funciones relacionadas a calculos o correcto string (tal como un correo, que debe poseer el simbolo de @).
