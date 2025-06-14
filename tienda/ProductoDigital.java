@@ -13,7 +13,7 @@ public class ProductoDigital extends Producto {
 
     @Override
     public void mostrarDetalle() {
-        System.out.println("📱 Producto Digital:");
+        System.out.println("Producto Digital:");
         System.out.println("Nombre: " + getNombre());
         System.out.println("Precio: $" + getPrecio());
         System.out.println("Categoría: " + getCategoria());

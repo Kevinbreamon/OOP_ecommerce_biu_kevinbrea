@@ -15,6 +15,20 @@ public class Main {
             "url_imagen_curso", "Licencia vitalicia", 365
         );
 
+        // --------Gestion del inventario-------
+        GestorInventario fisico  = new GestorInventarioFisico();
+        GestorInventario digital = new GestorInventarioDigital();
+
+        // Añadir stock / registrar en catálogo
+        fisico.añadirProducto(p1, 20);   // stock físico +20
+        digital.añadirProducto(p2, 0);   // registro del producto digital
+
+        // Mostrar existencias actuales
+        fisico.mostrarInventario();
+        digital.mostrarInventario();
+
+        // -------------Gestion del carrito-----------
+
         // Crear carrito de compras
         CarritoDeCompras carrito = new CarritoDeCompras(1);
 
@@ -34,7 +48,18 @@ public class Main {
         carrito.removerProductoPorId(102);
         System.out.println("Total después de remover producto digital: $" + carrito.calcularTotal());
 
-        // Vaciar carrito
+        
+
+    // ------------Gestion del pago-------------
+        ProcesoPago pago = new PagoTarjeta();       
+        String idTx = pago.iniciarPago(carrito.calcularTotal());
+
+        if (pago.verificarPago(idTx)) {
+            pago.confirmarPago(idTx, true);
+        }
+
+
+    // Vaciar carrito
         carrito.vaciar();
         System.out.println("Total después de vaciar carrito: $" + carrito.calcularTotal());
     }

@@ -17,7 +17,7 @@ public class ProductoFisico extends Producto {
 
     @Override
     public void mostrarDetalle() {
-        System.out.println("📦 Producto Físico:");
+        System.out.println("Producto Físico:");
         System.out.println("Nombre: " + nombre);
         System.out.println("Precio: $" + precio);
         System.out.println("Categoría: " + categoria);
