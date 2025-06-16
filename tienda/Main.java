@@ -62,5 +62,25 @@ public class Main {
     // Vaciar carrito
         carrito.vaciar();
         System.out.println("Total después de vaciar carrito: $" + carrito.calcularTotal());
+    
+    // Ejemplo de factory
+    Producto prodFactory = FabricaEntidades.crearProducto("fisico");
+    Usuario  admin = FabricaEntidades.crearUsuario("administrador");
+    System.out.println("Factory creó: " + prodFactory.getNombre() + " y usuario " + admin.getUsername());
+
+    // Ejemplo de Singleton
+    ConfiguracionSistema cfg = ConfiguracionSistema.getInstancia();
+    cfg.setModoOscuroUI(true);
+    System.out.println("Modo oscuro activo: " + cfg.isModoOscuroUI());
+
+    // Ejemplo de Observer
+    Pedido pedido = new Pedido(5001);
+    pedido.registrar(new InventarioObserver());
+    pedido.registrar(new UIObserver());
+
+    pedido.cambiarEstado("PAGADO");
+    pedido.cambiarEstado("ENVIADO");
+    
+    
     }
 }
