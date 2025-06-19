@@ -1,5 +1,6 @@
 package tienda;
 
+import tienda.excepciones.*;
 import java.util.Arrays;
 
 public class Main {
@@ -32,6 +33,8 @@ public class Main {
         // Crear carrito de compras
         CarritoDeCompras carrito = new CarritoDeCompras(1);
 
+        try {
+
         // Agregar productos al carrito (usando distintos métodos)
         carrito.agregarProducto(p1, 2);              // Producto físico
         carrito.agregarProducto(p2, 1);              // Producto digital
@@ -51,13 +54,20 @@ public class Main {
         
 
     // ------------Gestion del pago-------------
-        ProcesoPago pago = new PagoTarjeta();       
-        String idTx = pago.iniciarPago(carrito.calcularTotal());
+        ProcesoPago pago = new PagoTarjeta();
+        
+            String txId   = pago.iniciarPago(carrito.calcularTotal());
+            boolean okPay = pago.verificarPago(txId);
+            pago.confirmarPago(txId, okPay);
 
-        if (pago.verificarPago(idTx)) {
-            pago.confirmarPago(idTx, true);
+            System.out.println("Pedido finalizado con éxito.");
+
+        } catch (InventarioInsuficienteException e) {        // ← catch ajustado
+            System.err.println("Stock insuficiente: " + e.getMessage());
+
+        } catch (PagoFallidoException e) {
+            System.err.println("Pago rechazado: " + e.getMessage());
         }
-
 
     // Vaciar carrito
         carrito.vaciar();
@@ -80,7 +90,6 @@ public class Main {
 
     pedido.cambiarEstado("PAGADO");
     pedido.cambiarEstado("ENVIADO");
-    
     
     }
 }

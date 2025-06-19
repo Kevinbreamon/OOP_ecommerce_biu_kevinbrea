@@ -48,4 +48,8 @@ public class ProductoDigital extends Producto {
             System.out.println("Error: La duración debe ser mayor a cero.");
         }
     }
+
+    @Override public void reducirStock(int c) { } 
+    @Override public int getStock() { return 0; }
+
 }

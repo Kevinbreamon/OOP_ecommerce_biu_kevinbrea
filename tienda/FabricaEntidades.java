@@ -1,9 +1,19 @@
 package tienda;
 
+import tienda.excepciones.ProductoNoEncontradoException;
+import tienda.excepciones.UsuarioNoAutorizadoException;
+
 import java.util.Arrays;
 import java.util.Date;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class FabricaEntidades {
+
+    private static final List<Producto>  productos = new ArrayList<>();
+    private static final List<Usuario>   usuarios  = new ArrayList<>();
 
     // Creación de los productos
     public static Producto crearProducto(String tipo) {
@@ -48,4 +58,35 @@ public class FabricaEntidades {
                 throw new IllegalArgumentException("Tipo de usuario no soportado: " + tipo);
         }
     }
+
+
+    // Excepciones
+     
+    public static Producto obtenerProductoPorSku(String sku)
+            throws ProductoNoEncontradoException {
+
+        return productos.stream()
+                .filter(p -> p.getSku().equalsIgnoreCase(sku))
+                .findFirst()
+                .orElseThrow(() -> new ProductoNoEncontradoException(sku));
+    }
+
+    // Elimina un producto, solo si es un ADMIN puede hacerlo.
+     
+    public static void eliminarProducto(String sku, Usuario quienSolicita)
+            throws UsuarioNoAutorizadoException, ProductoNoEncontradoException {
+
+        if (!quienSolicita.esAdmin())
+            throw new UsuarioNoAutorizadoException(
+                    quienSolicita.getEmail(), "eliminar productos");
+
+        Producto p = obtenerProductoPorSku(sku);   
+        productos.remove(p);
+    }
+
+    /* Getters para tests o UI */
+
+    public static List<Producto> getProductos() { return Collections.unmodifiableList(productos); }
+    public static List<Usuario>  getUsuarios()  { return Collections.unmodifiableList(usuarios); }
+    
 }

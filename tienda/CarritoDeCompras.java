@@ -1,54 +1,59 @@
 package tienda;
 
+import tienda.excepciones.InventarioInsuficienteException;
+import tienda.excepciones.ProductoNoEncontradoException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CarritoDeCompras {
-    private List<ArticuloCarrito> articulos;
-    private int carritoId;
+
+    private final List<ArticuloCarrito> articulos = new ArrayList<>();
+    private final int carritoId;
 
     public CarritoDeCompras(int carritoId) {
         this.carritoId = carritoId;
-        this.articulos = new ArrayList<>();
     }
 
-    public void agregarProducto(Producto producto, int cantidad) {
-        if (cantidad <= 0) {
-            System.out.println("Error: La cantidad debe ser mayor a cero.");
-            return;
-        }
+    public void agregarProducto(Producto producto, int cantidad)
+            throws InventarioInsuficienteException {
+
+        validarCantidad(cantidad);
+        producto.reducirStock(cantidad);               
         articulos.add(new ArticuloCarrito(producto, cantidad));
-        System.out.println("Producto añadido: " + producto.getNombre() + " (x" + cantidad + ")");
+        System.out.printf("Producto añadido: %s (x%d)%n",
+                          producto.getNombre(), cantidad);
     }
 
-    // Sobrecarga: agregar por ID
-    public void agregarProducto(int productoId, int cantidad) {
-        if (cantidad <= 0) {
-            System.out.println("Error: La cantidad debe ser mayor a cero.");
-            return;
-        }
-        Producto producto = buscarProductoPorId(productoId);
-        if (producto != null) {
-            agregarProducto(producto, cantidad);
-        } else {
-            System.out.println("Producto con ID " + productoId + " no encontrado.");
-        }
+    // Añadir a traves de ID
+    public void agregarProducto(int productoId, int cantidad)
+            throws ProductoNoEncontradoException, InventarioInsuficienteException {
+
+        validarCantidad(cantidad);
+        Producto producto = buscarProductoPorId(productoId); 
+        agregarProducto(producto, cantidad);                   
     }
 
-    // Sobrecarga: agregar por nombre, precio y cantidad
-    public void agregarProducto(String nombre, float precio, int cantidad) {
-        if (precio < 0) {
-            System.out.println("Error: El precio no puede ser negativo.");
-            return;
-        }
-        if (cantidad <= 0) {
-            System.out.println("Error: La cantidad debe ser mayor a cero.");
-            return;
-        }
-        Producto p = new Producto(nombre, precio, "Sin categoría", -1, -1, "Sin descripción", "") {
+    /** Añadir rápido un producto “genérico” creado al vuelo. */
+    public void agregarProducto(String nombre, float precio, int cantidad)
+            throws InventarioInsuficienteException {
+
+        if (precio < 0)
+            throw new IllegalArgumentException("El precio no puede ser negativo.");
+        validarCantidad(cantidad);
+
+        Producto p = new Producto(nombre, precio, "Sin categoría",
+                                   -1, -1, "Sin descripción", "") {
+            @Override
+            public void reducirStock(int c) { }
+
+            @Override
+            public int getStock() { return Integer.MAX_VALUE; }
+
             @Override
             public void mostrarDetalle() {
-                System.out.println("Producto genérico: " + getNombre() + ", $" + getPrecio());
+                System.out.printf("Producto genérico: %s, $%.2f%n",
+                                  getNombre(), getPrecio());
             }
         };
         agregarProducto(p, cantidad);
@@ -93,7 +98,18 @@ public class CarritoDeCompras {
         return articulos;
     }
 
-    private Producto buscarProductoPorId(int productoId) {
-        return null;
+    private static void validarCantidad(int cantidad) {
+        if (cantidad <= 0)
+            throw new IllegalArgumentException("La cantidad debe ser mayor a cero.");
+    }    
+
+    private Producto buscarProductoPorId(int productoId)
+            throws ProductoNoEncontradoException {
+
+        return FabricaEntidades.getProductos().stream()
+                .filter(p -> p.getProductoId() == productoId)
+                .findFirst()
+                .orElseThrow(() ->
+                        new ProductoNoEncontradoException("ID:" + productoId));
     }
 }

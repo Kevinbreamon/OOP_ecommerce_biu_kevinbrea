@@ -67,6 +67,10 @@ public abstract class Usuario {
         }
     }
 
+    public String getEmail() {  
+        return correo;
+    }
+
     public String getContraseña() { return contraseña; }
     public void setContraseña(String contraseña) {
         if (contraseña != null && contraseña.length() >= 6) {
@@ -90,4 +94,11 @@ public abstract class Usuario {
 
     public String getRol() { return rol; }
     public void setRol(String rol) { this.rol = rol; }
+
+    //Excepcion
+
+    public boolean esAdmin() {
+    return "ADMIN".equalsIgnoreCase(this.rol);  
+    }
+
 }

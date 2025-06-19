@@ -1,5 +1,7 @@
 package tienda;
 
+import tienda.excepciones.InventarioInsuficienteException;
+
 public abstract class Producto {
     protected String nombre;
     protected float precio;
@@ -125,4 +127,11 @@ public abstract class Producto {
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
+
+    public abstract void reducirStock(int cantidad)
+    throws InventarioInsuficienteException;
+
+    /** Devuelve el stock actual —opcional pero útil para validaciones. */
+    public abstract int getStock();
+    public String getSku() { return String.valueOf(productoId); }
 }

@@ -10,8 +10,6 @@ Como compilador fue utilizado Javac, utilizando la terminal de vs code, es posib
 
 En la mas reciente y ultima actualizacion, se aplicaron los conceptos de polimorfismo y sobrecarga a las clases: Producto, ProductoDigital, ProductoFisico y CarritoDeCompras, logrando mostrar diferentes descripciones si se trata de un producto fisico o digital y permitiendo agregar productos al carrito de compras tanto a traves de su ID como a traves de su nombre. 
 
+ Realizada actualización con inclusión de la validación de datos en las clases del codigo, buscando asegurar poseer informacion correcta para aquellas funciones relacionadas a calculos o correcto string (tal como un correo, que debe poseer el simbolo de @).
 
-
-
-
-En la ultima actualización fue incluida la validación de datos en las clases del codigo, buscando asegurar poseer informacion correcta para aquellas funciones relacionadas a calculos o correcto string (tal como un correo, que debe poseer el simbolo de @).
+ Realizada actualizacion con la inclusion de nuevas clases abstractas e interfaces. Habilitando las clases relacionadas al modulo de pago y al control del inventario de productos.

@@ -6,7 +6,7 @@ public class InventarioObserver implements Observer {
         if ("ESTADO_PEDIDO".equals(evento)) {
             Pedido p = (Pedido) dato;
             System.out.println("[Inventario] Pedido " + p.getId()
-                    + " cambió a " + p.getEstado() + ". Actualizando stock…");
+                    + " cambió a " + p.getEstado() + ". Actualizando stock...");
         }
     }
 }

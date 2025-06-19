@@ -1,5 +1,6 @@
 package tienda;
 
+import tienda.excepciones.InventarioInsuficienteException;
 import java.util.List;
 
 public class ProductoFisico extends Producto {
@@ -28,11 +29,21 @@ public class ProductoFisico extends Producto {
         System.out.println("Imagen: " + urlImagen);
     }
 
+    // Excepciones 
+
+    @Override
+    public void reducirStock(int cantidad) throws InventarioInsuficienteException {
+        if (cantidad > stock) {
+            throw new InventarioInsuficienteException(nombre, cantidad, stock);
+        }
+        stock -= cantidad;
+    }
+
+
     // Getters y setters establecido con sus respectivas validaciones
 
-    public int getStock() {
-        return stock;
-    }
+    @Override
+    public int getStock() { return stock; }  
 
     public void setStock(int stock) {
         if (stock >= 0) {
@@ -65,4 +76,5 @@ public class ProductoFisico extends Producto {
             System.out.println("Error: Las dimensiones no pueden ser nulas.");
         }
     }
+    
 }

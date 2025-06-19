@@ -1,0 +1,15 @@
+{
+  // VS Code test runner buscará tests aquí
+  "java.test.sourcePaths": [
+    "tests"
+  ],
+    "java.project.sourcePaths": [
+      "",
+    "tests"          //  testeo
+  ],
+  // Todas las librerías *.jar dentro de lib/ quedan referenciadas
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar"
+  ],
+  "java.debug.settings.onBuildFailureProceed": true
+}
